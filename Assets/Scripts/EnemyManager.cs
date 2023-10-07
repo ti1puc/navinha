@@ -11,9 +11,10 @@ public class EnemyManager : MonoBehaviour
 
     private List<Transform> enemies = new List<Transform>();
 	private Transform closestEnemy;
-    #endregion
+	#endregion
 
-    #region Properties
+	#region Properties
+	public List<Transform> Enemies => enemies;
 	#endregion
 
 	#region Unity Messages

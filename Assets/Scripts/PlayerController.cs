@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,8 +11,13 @@ public class PlayerController : MonoBehaviour
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private Vector2 minMaxRangeHorizontal;
 	[SerializeField] private Vector2 minMaxRangeVertical;
+	[Header("Collision")]
+	[SerializeField] private int invencibilityFrames = 10;
+	[Header("References")]
+	[SerializeField] private HealthController healthController;
 
 	private Vector3 initialPosition;
+	private bool hasTookDamage;
 	#endregion
 
 	#region Unity Messages
@@ -41,11 +47,39 @@ public class PlayerController : MonoBehaviour
 		float clampedZ = Mathf.Clamp(transform.position.z, minMaxRangeVertical.x, minMaxRangeVertical.y);
 		transform.position = new Vector3(clampedX, initialPosition.y, clampedZ);
 	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (hasTookDamage)
+		{
+			StartCoroutine(DoAfterXFrames(invencibilityFrames, ResetTookDamage));
+			return;
+		}
+
+		if (other.CompareTag("Bullet") || other.CompareTag("Enemy"))
+		{
+			healthController.TakeDamage(1, GameManager.Instance.Defeat);
+			hasTookDamage = true;
+		}
+	}
 	#endregion
 
 	#region Public Methods
 	#endregion
 
 	#region Private Methods
+	private void ResetTookDamage()
+	{
+		hasTookDamage = false;
+	}
+
+	private IEnumerator DoAfterXFrames(int frames, Action action = null)
+	{
+		for (int i = 0; i < frames; i++)
+		{
+			yield return null;
+		}
+		action?.Invoke();
+	}
 	#endregion
 }
