@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyManager enemyManager;
 
     private int score;
+	private int maxScore;
     #endregion
 
     #region Properties
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
 		retryButtonWin.onClick.AddListener(Retry);
 		retryButtonLost.onClick.AddListener(Retry);
 
+		maxScore = enemyManager.Enemies.Count;
+
 		// reseta o time scale
 		Time.timeScale = 1f;
 	}
@@ -52,7 +55,7 @@ public class GameManager : MonoBehaviour
 
 	private void Update()
     {
-        if (score >= enemyManager.Enemies.Count)
+        if (score >= maxScore)
             Win();
     }
     #endregion
@@ -106,7 +109,7 @@ public class GameManager : MonoBehaviour
 
     private void UpdateScore()
     {
-		scoreText.text = $"Defeated {score} out of {enemyManager.Enemies.Count}";
+		scoreText.text = $"Defeated {score} out of {maxScore}";
     }
 	#endregion
 }

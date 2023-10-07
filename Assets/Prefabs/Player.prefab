@@ -952,6 +952,7 @@ MonoBehaviour:
   rotationSpeed: 200
   minMaxRangeHorizontal: {x: -439, y: 439}
   minMaxRangeVertical: {x: -421, y: 421}
+  invencibilityFrames: 10
   healthController: {fileID: 3641982831799821532}
 --- !u!114 &451603636025857822
 MonoBehaviour:

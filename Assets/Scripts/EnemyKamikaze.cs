@@ -8,6 +8,9 @@ public class EnemyKamikaze : MonoBehaviour
     public float speed = 5;
     public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
+	[Header("References")]
+	[SerializeField] private HealthController healthController;
+	[SerializeField] private PowerupDrop powerupDrop;
 
 	private GameObject jogador;
 	#endregion
@@ -22,6 +25,19 @@ public class EnemyKamikaze : MonoBehaviour
         // ficar procurando todo frame no update é custoso pra CPU
 		jogador = GameObject.FindWithTag("Player");
 	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("PlayerBullet"))
+		{
+			healthController.TakeDamage(1, DestroyEnemy);
+		}
+
+		if (other.CompareTag("Enemy"))
+		{
+			healthController.TakeDamage(30, DestroyEnemy);
+		}
+	}
 	#endregion
 
 	#region Public Methods
@@ -29,10 +45,17 @@ public class EnemyKamikaze : MonoBehaviour
     {
         lookAtPlayer();
     }
-    #endregion
+	#endregion
 
-    #region Private Methods
-    private void lookAtPlayer()
+	#region Private Methods
+	private void DestroyEnemy()
+	{
+		GameManager.IncreaseScore();
+		powerupDrop.TrySpawnPowerup();
+		Destroy(gameObject);
+	}
+
+	private void lookAtPlayer()
     {
         if (jogador != null && Vector3.Distance(transform.position, jogador.transform.position) <= minDistanceToFollow)
         {

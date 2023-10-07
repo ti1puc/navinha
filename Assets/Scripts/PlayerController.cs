@@ -61,6 +61,12 @@ public class PlayerController : MonoBehaviour
 			healthController.TakeDamage(1, GameManager.Instance.Defeat);
 			hasTookDamage = true;
 		}
+
+		if (other.CompareTag("Kamikaze"))
+		{
+			healthController.TakeDamage(30, GameManager.Instance.Defeat);
+			hasTookDamage = true;
+		}
 	}
 	#endregion
 

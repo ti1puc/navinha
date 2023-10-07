@@ -30,6 +30,12 @@ public class EnemyManager : MonoBehaviour
 	#region Public Methods
 	public Transform GetClosestEnemy(Vector3 comparePosition)
 	{
+		enemies.Clear();
+		foreach (Transform child in transform)
+		{
+			enemies.Add(child);
+		}
+
 		float closestDistance = int.MaxValue;
 
 		for (int i = 0; i < enemies.Count; i++)

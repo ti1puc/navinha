@@ -7,6 +7,9 @@ public class EnemyStationary : MonoBehaviour
 	#region Fields
 	public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
+	[Header("References")]
+	[SerializeField] private HealthController healthController;
+	[SerializeField] private PowerupDrop powerupDrop;
 
 	private GameObject jogador;
 	#endregion
@@ -21,6 +24,19 @@ public class EnemyStationary : MonoBehaviour
 		// ficar procurando todo frame no update é custoso pra CPU
 		jogador = GameObject.FindWithTag("Player");
 	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("PlayerBullet"))
+		{
+			healthController.TakeDamage(1, DestroyEnemy);
+		}
+
+		if (other.CompareTag("Kamikaze"))
+		{
+			healthController.TakeDamage(30, DestroyEnemy);
+		}
+	}
 	#endregion
 
 	#region Public Methods
@@ -31,6 +47,13 @@ public class EnemyStationary : MonoBehaviour
     #endregion
 
     #region Private Methods
+	private void DestroyEnemy()
+	{
+		GameManager.IncreaseScore();
+		powerupDrop.TrySpawnPowerup();
+		Destroy(gameObject);
+	}
+
     private void lookAtPlayer()
     {
         // Encontre o jogador pelo nome da tag
