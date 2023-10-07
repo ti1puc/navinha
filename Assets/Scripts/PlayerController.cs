@@ -67,7 +67,14 @@ public class PlayerController : MonoBehaviour
 			healthController.TakeDamage(30, GameManager.Instance.Defeat);
 			hasTookDamage = true;
 		}
-	}
+
+        if (other.CompareTag("powerUp"))
+        {
+            HealthController pupb_ = gameObject.GetComponent<HealthController>();
+            healthController.Heal(3);
+			Destroy(other.gameObject);
+        }
+    }
 	#endregion
 
 	#region Public Methods

@@ -501,6 +501,7 @@ MonoBehaviour:
   speed: 10
   minDistanceToFollow: 300
   smoothFollow: 60
+  PowerUp: {fileID: 6437534031450301476, guid: bdb5f49e7da925b4bbbbf6819052b66e, type: 3}
   healthController: {fileID: 850088172835128920}
   powerupDrop: {fileID: 6146513308044226157}
 --- !u!114 &850088172835128920

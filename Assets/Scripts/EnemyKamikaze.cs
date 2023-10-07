@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class EnemyKamikaze : MonoBehaviour
@@ -8,6 +9,7 @@ public class EnemyKamikaze : MonoBehaviour
     public float speed = 5;
     public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
+	public GameObject PowerUp;
 	[Header("References")]
 	[SerializeField] private HealthController healthController;
 	[SerializeField] private PowerupDrop powerupDrop;
@@ -52,6 +54,7 @@ public class EnemyKamikaze : MonoBehaviour
 	{
 		GameManager.IncreaseScore();
 		powerupDrop.TrySpawnPowerup();
+		spawnPUP();
 		Destroy(gameObject);
 	}
 
@@ -74,5 +77,19 @@ public class EnemyKamikaze : MonoBehaviour
             Debug.LogWarning("Jogador não encontrado com a tag " + "Player");
         }
     }
-    #endregion
+
+	private void spawnPUP()
+	{
+        // Gere um número aleatório entre 0 e 1
+        float randomValue = Random.value;
+
+		// Se o número gerado for menor ou igual a 0.5 (50% de chance), retorne true, caso contrário, retorne false
+		if (randomValue <= 0.75f) return;
+        else Instantiate(PowerUp, gameObject.transform.position, Quaternion.identity);
+
+
+    }
+
 }
+    #endregion
+

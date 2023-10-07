@@ -7,7 +7,8 @@ public class EnemyStationary : MonoBehaviour
 	#region Fields
 	public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
-	[Header("References")]
+    public GameObject PowerUp;
+    [Header("References")]
 	[SerializeField] private HealthController healthController;
 	[SerializeField] private PowerupDrop powerupDrop;
 
@@ -52,7 +53,9 @@ public class EnemyStationary : MonoBehaviour
 		GameManager.IncreaseScore();
 		powerupDrop.TrySpawnPowerup();
 		Destroy(gameObject);
-	}
+		spawnPUP();
+
+    }
 
     private void lookAtPlayer()
     {
@@ -73,6 +76,18 @@ public class EnemyStationary : MonoBehaviour
         {
             Debug.LogWarning("Jogador não encontrado com a tag " + "Player");
         }
+    }
+
+
+    private void spawnPUP()
+    {
+        // Gere um número aleatório entre 0 e 1
+        float randomValue = Random.value;
+
+        // Se o número gerado for menor ou igual a 0.5 (50% de chance), retorne true, caso contrário, retorne false
+        if (randomValue <= 0.35f) return;
+        else Instantiate(PowerUp, gameObject.transform.position, Quaternion.identity);
+
     }
     #endregion
 }

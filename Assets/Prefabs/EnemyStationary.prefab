@@ -506,6 +506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistanceToFollow: 70
   smoothFollow: 60
+  PowerUp: {fileID: 6437534031450301476, guid: bdb5f49e7da925b4bbbbf6819052b66e, type: 3}
   healthController: {fileID: 5193907780337287967}
   powerupDrop: {fileID: 5718256021834810125}
 --- !u!114 &7532821794392054101

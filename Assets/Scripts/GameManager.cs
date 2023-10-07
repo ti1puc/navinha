@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     #region Public Methods
     public static void IncreaseScore()
     {
-        Instance.score++;
+        Instance.score += 1;
         Instance.UpdateScore();
     }
 
