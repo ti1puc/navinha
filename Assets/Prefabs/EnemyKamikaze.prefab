@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  minDistanceToFollow: 70
+  smoothFollow: 60
 --- !u!1 &8127519656061884388
 GameObject:
   m_ObjectHideFlags: 0

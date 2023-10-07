@@ -144,6 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8b3779d8cb69594cb6e3ea67a287246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minDistanceToFollow: 70
+  smoothFollow: 60
 --- !u!114 &7532821794392054101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,11 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d479a2792d284e4da63038799ee94cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootInterval: 1
+  shootInterval: 0.1
   shootWithKey: 0
   canHoldShootKey: 0
   spawnPosition: {fileID: 8569849786338452167}
-  bulletPrefab: {fileID: 2024214191171873650, guid: 66820d9a1b9dcf0438fad0b0526e8ca9, type: 3}
+  bulletPrefab: {fileID: 2024214191171873650, guid: 7d9bad0a56c7ca1459259ac8cfeb5d44, type: 3}
 --- !u!1 &6624206704780670360
 GameObject:
   m_ObjectHideFlags: 0
