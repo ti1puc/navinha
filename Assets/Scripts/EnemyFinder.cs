@@ -30,6 +30,7 @@ public class EnemyFinder : MonoBehaviour
 	{
 		// get closest enemy from EnemyManager
 		closestEnemy = enemyManager.GetClosestEnemy(player.position);
+		if (closestEnemy == null) return;
 
 		distance = Vector3.Distance(player.position, closestEnemy.position);
 		bool shouldHide = distance <= minDistanceToHide || closestEnemy == null; // hide if too close or no enemy

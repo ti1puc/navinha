@@ -9,12 +9,13 @@ public class EnemyKamikaze : MonoBehaviour
     public float speed = 5;
     public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
-	public GameObject PowerUp;
+	[SerializeField, Range(0f, 1f)] private float powerupChance = .75f;
 	[Header("References")]
 	[SerializeField] private HealthController healthController;
-	[SerializeField] private PowerupDrop powerupDrop;
+	public GameObject PowerUp;
 
 	private GameObject jogador;
+	private bool hasDestroyed;
 	#endregion
 
 	#region Properties
@@ -30,9 +31,10 @@ public class EnemyKamikaze : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("PlayerBullet"))
+		if (other.CompareTag("PlayerBullet") || other.CompareTag("Bullet"))
 		{
 			healthController.TakeDamage(1, DestroyEnemy);
+			Destroy(other.gameObject);
 		}
 
 		if (other.CompareTag("Enemy"))
@@ -52,8 +54,10 @@ public class EnemyKamikaze : MonoBehaviour
 	#region Private Methods
 	private void DestroyEnemy()
 	{
+		if (hasDestroyed) return;
+
+		hasDestroyed = true;
 		GameManager.IncreaseScore();
-		powerupDrop.TrySpawnPowerup();
 		spawnPUP();
 		Destroy(gameObject);
 	}
@@ -84,7 +88,7 @@ public class EnemyKamikaze : MonoBehaviour
         float randomValue = Random.value;
 
 		// Se o número gerado for menor ou igual a 0.5 (50% de chance), retorne true, caso contrário, retorne false
-		if (randomValue <= 0.75f) return;
+		if (randomValue <= powerupChance) return;
         else Instantiate(PowerUp, gameObject.transform.position, Quaternion.identity);
 
 

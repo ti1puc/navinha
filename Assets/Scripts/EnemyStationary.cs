@@ -7,12 +7,13 @@ public class EnemyStationary : MonoBehaviour
 	#region Fields
 	public float minDistanceToFollow = 30;
 	public float smoothFollow = 30;
-    public GameObject PowerUp;
+	[SerializeField, Range(0f, 1f)] private float powerupChance = .35f;
     [Header("References")]
 	[SerializeField] private HealthController healthController;
-	[SerializeField] private PowerupDrop powerupDrop;
+    public GameObject PowerUp;
 
 	private GameObject jogador;
+	private bool hasDestroyed;
 	#endregion
 
 	#region Properties
@@ -31,6 +32,7 @@ public class EnemyStationary : MonoBehaviour
 		if (other.CompareTag("PlayerBullet"))
 		{
 			healthController.TakeDamage(1, DestroyEnemy);
+			Destroy(other.gameObject);
 		}
 
 		if (other.CompareTag("Kamikaze"))
@@ -50,11 +52,12 @@ public class EnemyStationary : MonoBehaviour
     #region Private Methods
 	private void DestroyEnemy()
 	{
-		GameManager.IncreaseScore();
-		powerupDrop.TrySpawnPowerup();
-		Destroy(gameObject);
-		spawnPUP();
+		if (hasDestroyed) return;
 
+		hasDestroyed = true;
+		GameManager.IncreaseScore();
+		spawnPUP();
+		Destroy(gameObject);
     }
 
     private void lookAtPlayer()
@@ -85,7 +88,7 @@ public class EnemyStationary : MonoBehaviour
         float randomValue = Random.value;
 
         // Se o número gerado for menor ou igual a 0.5 (50% de chance), retorne true, caso contrário, retorne false
-        if (randomValue <= 0.35f) return;
+        if (randomValue <= powerupChance) return;
         else Instantiate(PowerUp, gameObject.transform.position, Quaternion.identity);
 
     }

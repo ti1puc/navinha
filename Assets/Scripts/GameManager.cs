@@ -39,10 +39,13 @@ public class GameManager : MonoBehaviour
 		retryButtonWin.onClick.AddListener(Retry);
 		retryButtonLost.onClick.AddListener(Retry);
 
-		maxScore = enemyManager.Enemies.Count;
-
 		// reseta o time scale
 		Time.timeScale = 1f;
+	}
+
+	private void Start()
+	{
+		maxScore = enemyManager.Enemies.Count;
 	}
 
 	private void OnDestroy()

@@ -56,7 +56,14 @@ public class PlayerController : MonoBehaviour
 			return;
 		}
 
-		if (other.CompareTag("Bullet") || other.CompareTag("Enemy"))
+		if (other.CompareTag("Bullet"))
+		{
+			healthController.TakeDamage(1, GameManager.Instance.Defeat);
+			hasTookDamage = true;
+			Destroy(other.gameObject);
+		}
+
+		if (other.CompareTag("Enemy"))
 		{
 			healthController.TakeDamage(1, GameManager.Instance.Defeat);
 			hasTookDamage = true;

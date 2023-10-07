@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 7532821794392054101}
   - component: {fileID: 5193907780337287967}
   - component: {fileID: -4800768769714480}
-  - component: {fileID: 5718256021834810125}
   m_Layer: 0
   m_Name: EnemyStationary
   m_TagString: Enemy
@@ -506,9 +505,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistanceToFollow: 70
   smoothFollow: 60
-  PowerUp: {fileID: 6437534031450301476, guid: bdb5f49e7da925b4bbbbf6819052b66e, type: 3}
+  powerupChance: 0.35
   healthController: {fileID: 5193907780337287967}
-  powerupDrop: {fileID: 5718256021834810125}
+  PowerUp: {fileID: 6437534031450301476, guid: bdb5f49e7da925b4bbbbf6819052b66e, type: 3}
 --- !u!114 &7532821794392054101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,20 +555,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5718256021834810125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6496912954219250496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45cbe0add9b1b1e47992e751fae10f3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerupsPrefabs: []
-  dropChance: 0
 --- !u!1 &6624206704780670360
 GameObject:
   m_ObjectHideFlags: 0
